@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "coit-terraform-statebucket"
+    bucket = "coit-terraform-statebucket0606"
     key    = "ecommerce.tfstate"
     region = "ap-south-1"
   }
@@ -13,9 +13,9 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
   region  = "ap-south-1"
-}
+  profile = "default"
+  }
 
 variable "vpcCidr" {
   type = string
@@ -104,7 +104,7 @@ resource "aws_route_table_association" "associate-1b-rt" {
 
 variable "imageId" {
   type = string
-  default = "ami-0cfe39d5e0c8e331a"
+  default = "ami-0f5ee92e2d63afc18"
 }
 
 variable "instanceType" {
@@ -123,35 +123,26 @@ resource "aws_instance" "web001" {
   instance_type = "${var.instanceType}"
   subnet_id = aws_subnet.subnet_1a.id
   vpc_security_group_ids = [ aws_security_group.webservers.id ]
-  key_name = "mar22"
-  tags = {
-    Name = "Web-${count.index + 1}"
-    type = webserver
-  }
+  key_name = "advdevops3004"
+  
 }
 
 resource "aws_instance" "web002" {
-  ami           = "ami-0cfe39d5e0c8e331a"
+  ami           = "ami-0f5ee92e2d63afc18"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_1b.id
   vpc_security_group_ids = [ aws_security_group.webservers.id ]
-  key_name = "mar22"
-  tags = {
-    Name = "Web002"
-    type = webserver
-  }
+  key_name = "advdevops3004"
+  
 }
 
 resource "aws_instance" "web003" {
-  ami           = "ami-0cfe39d5e0c8e331a"
+  ami           = "ami-0f5ee92e2d63afc18"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_1b.id
   vpc_security_group_ids = [ aws_security_group.webservers.id ]
-  key_name = "mar22"
-  tags = {
-    Name = "Web003"
-    type = webserver
-  }
+  key_name = "advdevops3004"
+  
 }
 
 resource "aws_security_group" "aws_default_sg" {
@@ -254,8 +245,8 @@ resource "aws_security_group" "lb_webservers" {
 
 resource "aws_launch_configuration" "ecommerce-lc" {
   name          = "ecommerce-lc"
-  image_id      = "ami-0cfe39d5e0c8e331a"
+  image_id      = "ami-0f5ee92e2d63afc18"
   instance_type = "t2.micro"
   security_groups = [ aws_security_group.webservers.id ]
-  key_name = "mar22"
+  key_name = "advdevops3004"
 }
