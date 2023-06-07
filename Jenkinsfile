@@ -11,7 +11,7 @@ pipeline {
         stage('Code Checkout') {
             steps {
                 git branch: 'master',
-                    credentialsId: 'github-jenkins',
+                   credentialsId: 'github-jenkins',
                     url: 'https://github.com/jijopjoy80/terraform-manifests.git'
                 }
         }
